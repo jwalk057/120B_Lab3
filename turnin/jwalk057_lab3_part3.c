@@ -33,13 +33,14 @@ int main(void) {
 	fuel_Lvl = (PINA & 0x0F);
 
 	if(keyIgn && driverSeat && !driver_S_Belt){tmpC = 0x80;}
-	if(fuel_Lvl <= 0x04||fuel_Lvl == 0x00){tmpC = tmpC | 0x40;}
-	else if(fuel_Lvl <= 0x02){tmpC = tmpC | 0x20;}
-	else if(fuel_Lvl <= 0x04){tmpC = tmpC | 0x30;}
-	else if(fuel_Lvl <= 0x06){tmpC = tmpC | 0x38;}
-	else if(fuel_Lvl <= 0x09){tmpC = tmpC | 0x3C;}
-	else if(fuel_Lvl <= 0x0C){tmpC = tmpC | 0x3E;}
-	else{tmpC = tmpC | 0x3F;}
+	if(fuel_Lvl <= 0x04){tmpC = 0x40;}
+	if(fuel_Lvl == 0x00){tmpC = 0x40;}
+	else if(fuel_Lvl <= 0x02){tmpC = (tmpC & 0xC0) | 0x20;}
+	else if(fuel_Lvl <= 0x04){tmpC = (tmpC & 0xC0) | 0x30;}
+	else if(fuel_Lvl <= 0x06){tmpC = (tmpC & 0xC0) | 0x38;}
+	else if(fuel_Lvl <= 0x09){tmpC = (tmpC & 0xC0) | 0x3C;}
+	else if(fuel_Lvl <= 0x0C){tmpC = (tmpC & 0xC0) | 0x3E;}
+	else{tmpC = (tmpC & 0xC0) | 0x3F;}
 	PORTC = tmpC;
     }
     return 1;
