@@ -25,7 +25,8 @@ int main(void) {
         unsigned char tmpC = 0x00;
 	fuel_Lvl = (PINA & 0x0F);
 	if(fuel_Lvl <= 0x04){tmpC = 0x40;}
-	if(fuel_Lvl <= 0x02){tmpC = (tmpC & 0x40) | 0x20;}
+	if(fuel_Lvl == 0x00){tmpC = 0x40;}
+	else if(fuel_Lvl <= 0x02){tmpC = (tmpC & 0x40) | 0x20;}
 	else if(fuel_Lvl <= 0x04){tmpC = (tmpC & 0x40) | 0x30;}
 	else if(fuel_Lvl <= 0x06){tmpC = (tmpC & 0x40) | 0x38;}
 	else if(fuel_Lvl <= 0x09){tmpC = (tmpC & 0x40) | 0x3C;}
